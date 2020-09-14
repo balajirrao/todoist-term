@@ -1,0 +1,626 @@
+- name: projects
+  properties:
+  - property: id
+    datatype: Integer
+    description: The id of the project.
+  - property: legacy_id
+    datatype: Integer
+    description: The legacy id of the project. (only shown for objects created before
+      1 April 2017)
+  - property: name
+    datatype: String
+    description: The name of the project.
+  - property: color
+    datatype: Integer
+    description: Color id. It’s a value between 30 and 49, refer to Colors for more
+      info.
+  - property: parent_id
+    datatype: Integer
+    description: The id of the parent project. Set to null for root projects.
+  - property: legacy_parent_id
+    datatype: Integer
+    description: The legacy id of the parent project. Set to null for root projects.  (only
+      shown for objects created before 1 April 2017)
+  - property: child_order
+    datatype: Integer
+    description: The order of project. Defines the position of the task among all
+      the projects with the same parent_id
+  - property: collapsed
+    datatype: Integer
+    description: Whether the project’s sub-projects are collapsed (where 1 is true
+      and 0 is false).
+  - property: shared
+    datatype: Boolean
+    description: Whether the project is shared (a true or false value).
+  - property: is_deleted
+    datatype: Integer
+    description: Whether the project is marked as deleted (where 1 is true and 0 is
+      false).
+  - property: is_archived
+    datatype: Integer
+    description: Whether the project is marked as archived (where 1 is true and 0
+      is false).
+  - property: is_favorite
+    datatype: Integer
+    description: Whether the project is favorite (where 1 is true and 0 is false).
+  - property: sync_id
+    datatype: integer
+    description: Identifier to find the match between different copes of shared projects.
+      When you share a project, its copy has a different ID for your collaborators.
+      To find a project in a different account that matches yours, you can use the
+      “sync_id” attribute. For non-shared projects the attribute is set to null.
+  - property: inbox_project
+    datatype: Boolean
+    description: Whether the project is Inbox (true or otherwise this property is
+      not sent).
+  - property: team_inbox
+    datatype: Boolean
+    description: Whether the project is TeamInbox (true or otherwise this property
+      is not sent).
+- name: templates
+  properties:
+  - property: id
+    datatype: Integer
+    description: The id of the task.
+  - property: legacy_id
+    datatype: Integer
+    description: The legacy id of the task (only shown for objects created before
+      1 April 2017)
+  - property: user_id
+    datatype: Integer
+    description: The owner of the task.
+  - property: project_id
+    datatype: Integer
+    description: Project that the task resides in
+  - property: legacy_project_id
+    datatype: Integer
+    description: Legacy project id for the project that the task resides in (only
+      shown for objects created before 1 April 2017)
+  - property: content
+    datatype: String
+    description: The text of the task
+  - property: due
+    datatype: Object
+    description: The due date of the task. See the Due dates section for more details.
+  - property: priority
+    datatype: Integer
+    description: 'The priority of the task (a number between 1 and 4, 4 for very urgent
+      and 1 for natural). Note: Keep in mind that very urgent is the priority 1 on
+      clients. So, p1 will return 4 in the API.'
+  - property: parent_id
+    datatype: Integer
+    description: The id of the parent task. Set to null for root tasks
+  - property: legacy_parent_id
+    datatype: Integer
+    description: The legacy id of the parent task. Set to null for root tasks (only
+      shown for objects created before 1 April 2017)
+  - property: child_order
+    datatype: Integer
+    description: The order of task. Defines the position of the task among all the
+      tasks with the same parent_id
+  - property: section_id
+    datatype: Integer
+    description: The id of the section.  Set to null for tasks not belonging to a
+      section.
+  - property: day_order
+    datatype: Integer
+    description: The order of the task inside the Today or Next 7 days view (a number,
+      where the smallest value would place the task at the top).
+  - property: collapsed
+    datatype: Integer
+    description: Whether the task’s sub-tasks are collapsed (where 1 is true and 0
+      is false).
+  - property: labels
+    datatype: Array of Integer
+    description: The tasks labels (a list of label ids such as [2324,2525]).
+  - property: added_by_uid
+    datatype: Integer
+    description: The id of the user who created the current task. This makes sense
+      for shared projects only. For tasks, created before 31 Oct 2019 the value is
+      set to null. Cannot be set explicitly or changed via API.
+  - property: assigned_by_uid
+    datatype: Integer
+    description: The id of the user who assigns the current task. This makes sense
+      for shared projects only. Accepts any user id from the list of project collaborators.
+      If this value is unset or invalid, it will automatically be set up to your uid.
+  - property: responsible_uid
+    datatype: Integer
+    description: The id of user who is responsible for accomplishing the current task.
+      This makes sense for shared projects only. Accepts any user id from the list
+      of project collaborators or null or an empty string to unset.
+  - property: checked
+    datatype: Integer
+    description: Whether the task is marked as completed (where 1 is true and 0 is
+      false).
+  - property: in_history
+    datatype: Integer
+    description: Whether the task has been marked as completed and is marked to be
+      moved to history, because all the child tasks of its parent are also marked
+      as completed (where 1 is true and 0 is false)
+  - property: is_deleted
+    datatype: Integer
+    description: Whether the task is marked as deleted (where 1 is true and 0 is false).
+  - property: sync_id
+    datatype: Integer
+    description: Identifier to find the match between tasks in shared projects of
+      different collaborators. When you share a task, its copy has a different ID
+      in the projects of your collaborators. To find a task in another account that
+      matches yours, you can use the “sync_id” attribute. For non-shared tasks, the
+      attribute is null.
+  - property: date_completed
+    datatype: String
+    description: The date when the task was completed (or null if not completed).
+  - property: date_added
+    datatype: String
+    description: The date when the task was created.
+- name: labels
+  properties:
+  - property: id
+    datatype: Integer
+    description: The id of the label.
+  - property: name
+    datatype: String
+    description: The name of the label.
+  - property: color
+    datatype: Integer
+    description: Color id. It’s a value between 30 and 49, refer to Colors for more
+      info.
+  - property: item_order
+    datatype: Integer
+    description: Label’s order in the label list (a number, where the smallest value
+      should place the label at the top).
+  - property: is_deleted
+    datatype: Integer
+    description: Whether the label is marked as deleted (where 1 is true and 0 is
+      false).
+  - property: is_favorite
+    datatype: Integer
+    description: Whether the label is favorite (where 1 is true and 0 is false).
+- name: notes
+  properties:
+  - property: id
+    datatype: Integer
+    description: The id of the note.
+  - property: legacy_id
+    datatype: Integer
+    description: The legacy id of the note. (only shown for objects created before
+      1 April 2017)
+  - property: posted_uid
+    datatype: Integer
+    description: The id of the user that posted the note.
+  - property: item_id
+    datatype: Integer
+    description: The item which the note is part of.
+  - property: legacy_item_id
+    datatype: Integer
+    description: The legacy item which the note is part of. (only shown for objects
+      created before 1 April 2017)
+  - property: project_id
+    datatype: Integer
+    description: The project which the note is part of.
+  - property: legacy_project_id
+    datatype: Integer
+    description: The legacy project which the note is part of. (only shown for objects
+      created before 1 April 2017)
+  - property: content
+    datatype: String
+    description: The content of the note.
+  - property: file_attachment
+    datatype: Object
+    description: A file attached to the note (see more details about attachments later
+      on).
+  - property: uids_to_notify
+    datatype: Array of Integer
+    description: A list of user ids to notify.
+  - property: is_deleted
+    datatype: Integer
+    description: Whether the note is marked as deleted (where 1 is true and 0 is false).
+  - property: posted
+    datatype: String
+    description: The date when the note was posted.
+  - property: reactions
+    datatype: Object
+    description: List of emoji reactions and corresponding user ids.
+- name: project-notes
+  properties:
+  - property: id
+    datatype: Integer
+    description: The id of the note.
+  - property: posted_uid
+    datatype: Integer
+    description: The id of the user that posted the note.
+  - property: project_id
+    datatype: Integer
+    description: The project which the note is part of.
+  - property: content
+    datatype: String
+    description: The content of the note.
+  - property: file_attachment
+    datatype: Object
+    description: A file attached to the note (see more details about attachments later
+      on).
+  - property: uids_to_notify
+    datatype: Array of Integer
+    description: A list of user ids to notify.
+  - property: is_deleted
+    datatype: Integer
+    description: Whether the note is marked as deleted (where 1 is true and 0 is false).
+  - property: posted
+    datatype: String
+    description: The date when the note was posted.
+  - property: reactions
+    datatype: Object
+    description: List of emoji reactions and corresponding user ids.
+- name: sections
+  properties:
+  - property: id
+    datatype: Integer
+    description: The id of the section.
+  - property: name
+    datatype: String
+    description: The name of the section.
+  - property: project_id
+    datatype: Integer
+    description: Project that the section resides in
+  - property: legacy_project_id
+    datatype: Integer
+    description: Legacy project id for the project that the section resides in (only
+      shown for objects created before 1 April 2017)
+  - property: section_order
+    datatype: Integer
+    description: The order of section. Defines the position of the section among all
+      the sections in the project
+  - property: collapsed
+    datatype: Boolean
+    description: Whether the section’s tasks are collapsed (a true or false value).
+  - property: sync_id
+    datatype: Integer
+    description: A special id for shared sections (a number or null if not set). Used
+      internally and can be ignored.
+  - property: is_deleted
+    datatype: Boolean
+    description: Whether the section is marked as deleted (a true or false value).
+  - property: is_archived
+    datatype: Boolean
+    description: Whether the section is marked as archived (a true or false value).
+  - property: date_archived
+    datatype: String
+    description: The date when the section was archived (or null if not archived).
+  - property: date_added
+    datatype: String
+    description: The date when the section was created.
+- name: uploads
+  properties:
+  - property: id
+    datatype: Integer
+    description: The id of the filter.
+  - property: name
+    datatype: String
+    description: The name of the filter.
+  - property: query
+    datatype: String
+    description: The query to search for. Examples of searches can be found in the
+      Todoist help page.
+  - property: color
+    datatype: Integer
+    description: Color id. It’s a value between 30 and 49, refer to Colors for more
+      info.
+  - property: item_order
+    datatype: Integer
+    description: Filter’s order in the filter list (where the smallest value should
+      place the filter at the top).
+  - property: is_deleted
+    datatype: Integer
+    description: Whether the filter is marked as deleted (where 1 is true and 0 is
+      false).
+  - property: is_favorite
+    datatype: Integer
+    description: Whether the filter is favorite (where 1 is true and 0 is false).
+- name: reminders
+  properties:
+  - property: id
+    datatype: Integer
+    description: The id of the reminder.
+  - property: notify_uid
+    datatype: Integer
+    description: The user id which should be notified of the reminder, typically the
+      current user id creating the reminder.
+  - property: item_id
+    datatype: Integer
+    description: The item id for which the reminder is about.
+  - property: service
+    datatype: String
+    description: 'The way to get notified of the reminder: email for e-mail, mobile
+      for mobile text message, or push for mobile push notification.'
+  - property: type
+    datatype: String
+    description: 'The type of the reminder: relative for a time-based reminder specified
+      in minutes from now, absolute for a time-based reminder with a specific time
+      and date in the future, and location for a location-based reminder.'
+  - property: due
+    datatype: Object
+    description: The due date of the reminder. See the Due dates section for more
+      details. Note that reminders only support due dates with time, since full-day
+      reminders don’t make sense.
+  - property: mm_offset
+    datatype: Integer
+    description: The relative time in minutes before the due date of the item, in
+      which the reminder should be triggered. Note that the item should have a due
+      date set in order to add a relative reminder.
+  - property: name
+    datatype: String
+    description: An alias name for the location.
+  - property: loc_lat
+    datatype: String
+    description: The location latitude.
+  - property: loc_long
+    datatype: String
+    description: The location longitude.
+  - property: loc_trigger
+    datatype: String
+    description: 'What should trigger the reminder: on_enter for entering the location,
+      or on_leave for leaving the location.'
+  - property: radius
+    datatype: Integer
+    description: The radius around the location that is still considered as part of
+      the location (in meters).
+  - property: is_deleted
+    datatype: Integer
+    description: Whether the reminder is marked as deleted (where 1 is true and 0
+      is false).
+- name: due-dates
+  properties:
+  - property: date
+    datatype: string
+    description: Due date in the format of YYYY-MM-DD (RFC 3339). For recurring dates,
+      the date of the current iteration.
+  - property: timezone
+    datatype: string
+    description: Always set to null.
+  - property: string
+    datatype: string
+    description: Human-readable representation of due date. String always represents
+      the due object in user’s timezone. Look at our reference to see which formats
+      are supported.
+  - property: lang
+    datatype: string
+    description: 'Lang which has to be used to parse the content of the string attribute.
+      Used by clients and on the server side to properly process due dates when date
+      object is not set, and when dealing with recurring tasks. Valid languages are:
+      en, da, pl, zh, ko, de, pt, ja, it, fr, sv, ru, es, nl.'
+  - property: is_recurring
+    datatype: boolean
+    description: Boolean flag which is set to true is due object represents a recurring
+      due date
+- name: miscellaneous
+  properties:
+  - property: karma_last_update
+    datatype: Float
+    description: The karma delta on the last update
+  - property: karma_trend
+    datatype: String
+    description: 'Karma trend. Possible values: up or down'
+  - property: days_items
+    datatype: Object
+    description: The last 7 days of completion. Items completed in the last 4 weeks.
+      The objects inside items are composed by an id (project_id) and the number of
+      completed tasks for it.
+  - property: completed_count
+    datatype: Integer
+    description: Total completed tasks count
+  - property: karma_update_reasons
+    datatype: ''
+    description: Log of the last karma updates. positive_karma_reasons and negative_karma_reasons
+      are Integer numbers regarding the action done to generate them. Please refer
+      to the Positive and negative karma reasons below.
+  - property: karma
+    datatype: Float
+    description: Karma score
+  - property: week_items
+    datatype: Object
+    description: Items completed in the last 4 weeks. The objects inside items are
+      composed by an id (project_id) and the number of completed tasks for it.
+  - property: project_colors
+    datatype: Object
+    description: Projects color mapping
+  - property: goals
+    datatype: Object
+    description: Goals definition. The same settings and stats shown in the interface.
+- name: quick-add-task
+  properties:
+  - property: auto_reminder
+    datatype: Integer
+    description: The default time in minutes for the automatic reminders set, whenever
+      a due date has been specified for a task.
+  - property: avatar_big
+    datatype: String
+    description: The link to a 195x195 pixels image of the user’s avatar.
+  - property: avatar_medium
+    datatype: String
+    description: The link to a 60x60 pixels image of the user’s avatar.
+  - property: avatar_s640
+    datatype: String
+    description: The link to a 640x640 pixels image of the user’s avatar.
+  - property: avatar_small
+    datatype: String
+    description: The link to a 35x35 pixels image of the user’s avatar.
+  - property: business_account_id
+    datatype: Integer
+    description: The id of the user’s business account.
+  - property: daily_goal
+    datatype: Integer
+    description: The daily goal number of completed tasks for karma
+  - property: date_format
+    datatype: Integer
+    description: Whether to use the DD-MM-YYYY date format (if set to 0), or the MM-DD-YYYY
+      format (if set to 1).
+  - property: dateist_inline_disabled
+    datatype: Boolean
+    description: Whether smart date recognition has been disabled (a true or false
+      value).
+  - property: dateist_lang
+    datatype: String
+    description: 'The language expected for date recognition instead of the user’s
+      lang (null if the user’s lang determines this), one of the following values:
+      da, de, en, es, fi, fr, it, ja, ko, nl, pl, pt_BR, ru, sv, tr, zh_CN, zh_TW.'
+  - property: days_off
+    datatype: Array
+    description: Array of integers representing user’s days off (between 1 and 7,
+      where 1 is Monday and 7 is Sunday).
+  - property: default_reminder
+    datatype: String
+    description: 'The default reminder for the user. Reminders are only possible for
+      Premium users. The default reminder can be one of the following: email to send
+      reminders by email, mobile to send reminders to mobile devices via SMS, push
+      to send reminders to smart devices using push notifications (one of the Android
+      or iOS official clients must be installed on the client side to receive these
+      notifications), no_default to turn off sending default reminders.'
+  - property: email
+    datatype: String
+    description: The user’s email.
+  - property: features
+    datatype: Object
+    description: Used internally for any special features that apply to the user.
+      Current special features include whether the user has enabled beta, whether
+      dateist_inline_disabled that is inline date parsing support is disabled, whether
+      the dateist_lang is set which overrides the date parsing language, whether the
+      gold_theme has been awarded to the user, whether the user has_push_reminders
+      enabled, whether the user has karma_disabled, whether the user has karma_vacation
+      mode enabled, and whether any special restriction applies to the user.
+  - property: full_name
+    datatype: String
+    description: The user’s real name formatted as Firstname Lastname.
+  - property: id
+    datatype: Integer
+    description: The user’s id.
+  - property: image_id
+    datatype: String
+    description: The id of the user’s avatar.
+  - property: inbox_project
+    datatype: Integer
+    description: The id of the user’s Inbox project.
+  - property: is_biz_admin
+    datatype: Boolean
+    description: Whether the user is a business account administrator (a true or false
+      value).
+  - property: is_premium
+    datatype: Boolean
+    description: Whether the user has a Premium subscription (a true or false value).
+  - property: join_date
+    datatype: String
+    description: The date when the user joined Todoist.
+  - property: karma
+    datatype: Integer
+    description: The user’s karma score.
+  - property: karma_trend
+    datatype: String
+    description: The user’s karma trend (for example up).
+  - property: lang
+    datatype: String
+    description: 'The user’s language, which can take one of the following values:
+      da, de, en, es, fi, fr, it, ja, ko, nl, pl, pt_BR, ru, sv, tr, zh_CN, zh_TW.'
+  - property: legacy_inbox_project
+    datatype: Integer
+    description: The legacy id of the user’s Inbox project. (only shown for objects
+      created before 1 April 2017)
+  - property: legacy_team_inbox
+    datatype: Integer
+    description: The legacy id of the Team Inbox project. (only shown for objects
+      created before 1 April 2017)
+  - property: mobile_host
+    datatype: String
+    description: The user’s mobile host (null if not set).
+  - property: mobile_number
+    datatype: String
+    description: The user’s mobile number (null if not set).
+  - property: next_week
+    datatype: Integer
+    description: The day of the next week, that tasks will be postponed to (between
+      1 and 7, where 1 is Monday and 7 is Sunday).
+  - property: premium_until
+    datatype: String
+    description: The date when the user’s Premium subscription ends (null if not a
+      Premium user). This should be used for informational purposes only as this does
+      not include the grace period upon expiration. As a result, avoid using this
+      to determine whether someone has premium and use is_premium instead.
+  - property: sort_order
+    datatype: Integer
+    description: Whether to show projects in an oldest dates first order (if set to
+      0, or a oldest dates last order (if set to 1).
+  - property: start_day
+    datatype: Integer
+    description: The first day of the week (between 1 and 7, where 1 is Monday and
+      7 is Sunday).
+  - property: start_page
+    datatype: String
+    description: 'The user’s default view on Todoist. The start page can be one of
+      the following: _info_page for the info page, _blank for a blank page, _project_<PROJECT_ID>
+      for project with id <PROJECT_ID>, and <ANY_QUERY> to query after anything.'
+  - property: team_inbox
+    datatype: Integer
+    description: The id of the Team Inbox project.
+  - property: theme
+    datatype: Integer
+    description: The currently selected Todoist theme (a number between 0 and 10).
+  - property: time_format
+    datatype: Integer
+    description: Whether to use a 24h format such as 13:00 (if set to 0) when displaying
+      time, or a 12h format such as 1:00pm (if set to 1).
+  - property: token
+    datatype: String
+    description: The user’s token that should be used to call the other API methods.
+  - property: tz_info
+    datatype: Object
+    description: 'The user’s timezone (a dictionary structure), which includes the
+      following elements: the timezone as a string value, the hours and minutes difference
+      from GMT, whether daylight saving time applies denoted by is_dst, and a string
+      value of the time difference from GMT that is gmt_string.'
+  - property: weekly_goal
+    datatype: Integer
+    description: The target number of tasks to complete per week.
+- name: user-settings
+  properties:
+  - property: reminder_push
+    datatype: Boolean
+    description: Set to true to send reminders as push notifications
+  - property: reminder_sms
+    datatype: Boolean
+    description: Set to true to send reminders via SMS
+  - property: reminder_desktop
+    datatype: Boolean
+    description: Set to true to show reminders in desktop applications
+  - property: reminder_email
+    datatype: Boolean
+    description: Set to true to send reminders by email
+- name: sharing
+  properties:
+  - property: object_type
+    datatype: String
+    description: 'No'
+  - property: object_id
+    datatype: Integer
+    description: 'No'
+  - property: event_type
+    datatype: String
+    description: 'No'
+  - property: object_event_types
+    datatype: Array of Strings
+    description: 'No'
+  - property: parent_project_id
+    datatype: Integer
+    description: 'No'
+  - property: parent_item_id
+    datatype: Integer
+    description: 'No'
+  - property: initiator_id
+    datatype: Integer
+    description: 'No'
+  - property: page
+    datatype: Integer
+    description: 'No'
+  - property: limit
+    datatype: Integer
+    description: 'No'
+  - property: offset
+    datatype: Integer
+    description: 'No'

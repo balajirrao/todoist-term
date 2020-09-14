@@ -1,0 +1,42 @@
+name:                todoist-api
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/balajirrao/todoist-term#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Balaji Rao
+maintainer:          balajirrao@gmail.com
+copyright:           2020 Balaji Rao
+category:            Web
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Todoist.API.Sync
+                    ,  Todoist.API.Internal.Sync
+  build-depends:       base >= 4.7 && < 5
+                    ,  yaml
+                    ,  file-embed
+                    ,  bytestring
+
+  default-language:    Haskell2010
+
+executable todoist-api-scraper
+  hs-source-dirs:      src/scraper
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                    ,  data-default
+                    ,  scalpel
+                    ,  http-client
+                    ,  http-types
+                    ,  http-client-tls
+                    ,  yaml
+                    ,  todoist-api
+
+source-repository head
+  type:     git
+  location: https://github.com/balajirrao/todoist-term
